@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/user.model')
+const auth = require('../middlewares/auth')
 
 router.post('/register', async(req, res, next) => {
   try{
@@ -100,7 +101,7 @@ router.post('/tokenIsValid', async(req, res, next) => {
 })
 
 
-router.get('/', async (req, res, next) => {
+router.get('/', auth, async (req, res, next) => {
   // const user = await User.findById(req.user)
   const user = await User.findById(req.user)
   console.log(user)
